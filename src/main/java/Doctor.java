@@ -31,7 +31,18 @@ public class Doctor {
       return false;
     } else {
       Doctor newDoctor = (Doctor) otherDoctor;
-      return this.getName().equals(newDoctor.getName());
+      return this.getName().equals(newDoctor.getName()) &&
+            this.getId() == newDoctor.getId();
     }
+  }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO doctors (name) VALUES (:name)";
+      con.createQuery(sql)
+        .addParameter("name", this.name)
+        .executeUpdate();
+    }
+
   }
 }

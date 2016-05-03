@@ -55,5 +55,14 @@ public class Doctor {
           .executeAndFetchFirst(Doctor.class);
         return doctor;
       }
-  }
+    }
+
+    public List<Patient> getPatients() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "SELECT * FROM patients WHERE doctor_id=:id";
+        return con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeAndFetch(Patient.class);
+      }
+    }
 }

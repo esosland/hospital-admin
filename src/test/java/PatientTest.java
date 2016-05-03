@@ -24,14 +24,14 @@ public class PatientTest {
   }
 
   @Test
-  public void getName_patientInstantiatesWithName_String() {
-    Patient myPatient = new Patient("Person");
-    assertEquals("Person", myPatient.getName());
+  public void all_emptyAtFirst() {
+    assertEquals(Patient.all().size(), 0);
   }
 
   @Test
-  public void all_emptyAtFirst() {
-    assertEquals(Patient.all().size(), 0);
+  public void getName_patientInstantiatesWithName_String() {
+    Patient myPatient = new Patient("Person");
+    assertEquals("Person", myPatient.getName());
   }
 
   @Test

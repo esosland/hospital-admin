@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class DoctorTest {
 
@@ -12,8 +13,10 @@ public class DoctorTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM doctors *;";
-      con.createQuery(sql).executeUpdate();
+      String deleteDoctors = "DELETE FROM doctors *;";
+      String deletePatients = "DELETE FROM patients *;";
+      con.createQuery(deleteDoctors).executeUpdate();
+      con.createQuery(deletePatients).executeUpdate();
     }
   }
 
@@ -48,5 +51,17 @@ public class DoctorTest {
     myDoctor.save();
     Doctor savedDoctor = Doctor.find(myDoctor.getId());
     assertTrue(myDoctor.equals(savedDoctor));
+  }
+
+  @Test
+  public void getPatients_retrievesAllPatientsFromDatabase_patientsList() {
+    Doctor myDoctor = new Doctor("Doctor Smith");
+    myDoctor.save();
+    Patient firstPatient = new Patient("Bub", myDoctor.getId());
+    firstPatient.save();
+    Patient secondPatient = new Patient("Bob", myDoctor.getId());
+    secondPatient.save();
+    Patient[] patients = new Patient[] { firstPatient, secondPatient };
+    assertTrue(myDoctor.getPatients().containsAll(Arrays.asList(patients)));
   }
 }

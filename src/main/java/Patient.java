@@ -12,12 +12,21 @@ public class Patient {
     this.name = name;
   }
 
+  public Patient(String name, int doctor_id) {
+    this.name = name;
+    this.doctor_id = doctor_id;
+  }
+
   public String getName() {
     return name;
   }
 
   public int getId() {
     return id;
+  }
+
+  public int getDoctorId() {
+    return doctor_id;
   }
 
   public static List<Patient> all() {
@@ -34,7 +43,8 @@ public class Patient {
     } else {
       Patient newPatient = (Patient) otherPatient;
       return this.getName().equals(newPatient.getName()) &&
-              this.getId() == newPatient.getId();
+              this.getId() == newPatient.getId() &&
+              this.getDoctorId() == newPatient.getDoctorId();
     }
   }
 
@@ -56,6 +66,6 @@ public class Patient {
       .addParameter("id", id)
       .executeAndFetchFirst(Patient.class);
     return patient;
+    }
   }
-}
 }

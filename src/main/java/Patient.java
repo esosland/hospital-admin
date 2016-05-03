@@ -22,4 +22,14 @@ public class Patient {
       return con.createQuery(sql).executeAndFetch(Patient.class);
     }
   }
+
+  @Override
+  public boolean equals(Object otherPatient) {
+    if (!(otherPatient instanceof Patient)) {
+      return false;
+    } else {
+      Patient newPatient = (Patient) otherPatient;
+      return this.getName().equals(newPatient.getName());
+    }
+  }
 }

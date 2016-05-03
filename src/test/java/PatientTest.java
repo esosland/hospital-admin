@@ -33,4 +33,11 @@ public class PatientTest {
   public void all_emptyAtFirst() {
     assertEquals(Patient.all().size(), 0);
   }
+
+  @Test
+  public void equals_returnsTrueIfNamesAreTheSame() {
+    Patient firstPatient = new Patient("Bub");
+    Patient secondPatient = new Patient("Bub");
+    assertTrue(firstPatient.equals(secondPatient));
+  }
 }

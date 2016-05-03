@@ -8,6 +8,7 @@ public class Doctor {
 
   public Doctor(String name) {
     this.name = name;
+    this.id = id;
   }
 
   public String getName() {
@@ -39,9 +40,10 @@ public class Doctor {
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO doctors (name) VALUES (:name)";
-      con.createQuery(sql)
+       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
-        .executeUpdate();
+        .executeUpdate()
+        .getKey();
     }
   }
 

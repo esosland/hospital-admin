@@ -41,6 +41,15 @@ public class DoctorTest {
     assertTrue(firstDoctor.equals(secondDoctor));
   }
 
+  // Don't forget .getKey() Query and true statement for sql to add id
+  @Test
+  public void save_savesIntoDatabase_true() {
+    Doctor myDoctor = new Doctor("Doctor Smith");
+    myDoctor.save();
+    Doctor savedDoctor = Doctor.find(myDoctor.getId());
+    assertTrue(myDoctor.equals(savedDoctor));
+  }
+
   // @Test
   // public void find_findsDoctorInDatabase_true() {
   //   Doctor myDoctor = new Doctor("Doctor Smith");

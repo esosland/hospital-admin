@@ -22,4 +22,10 @@ public class DoctorTest {
     Doctor myDoctor = new Doctor("Doctor Smith");
     assertEquals(true, myDoctor instanceof Doctor);
   }
+
+  @Test
+  public void getName_taskInstantiatesWithDescription_String() {
+    Doctor myDoctor = new Doctor("Doctor Smith");
+    assertEquals("Doctor Smith", myDoctor.getName());
+  }
 }

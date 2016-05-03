@@ -6,4 +6,8 @@ public class Doctor {
   public Doctor(String name) {
     this.name = name;
   }
+
+  public String getName() {
+    return name;
+  }
 }

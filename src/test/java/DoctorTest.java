@@ -33,4 +33,11 @@ public class DoctorTest {
   public void all_emptyAtFirst() {
     assertEquals(Doctor.all().size(), 0);
   }
+
+  @Test
+  public void equals_returnsTrueIfNamesAreTheSame() {
+    Doctor firstDoctor = new Doctor("Doctor Smith");
+    Doctor secondDoctor = new Doctor("Doctor Smith");
+    assertTrue(firstDoctor.equals(secondDoctor));
+  }
 }

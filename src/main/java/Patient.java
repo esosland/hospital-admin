@@ -16,6 +16,10 @@ public class Patient {
     return name;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public static List<Patient> all() {
     String sql = "SELECT id, name FROM patients";
     try(Connection con = DB.sql2o.open()) {
@@ -29,7 +33,29 @@ public class Patient {
       return false;
     } else {
       Patient newPatient = (Patient) otherPatient;
-      return this.getName().equals(newPatient.getName());
+      return this.getName().equals(newPatient.getName()) &&
+              this.getId() == newPatient.getId();
     }
   }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO patients (name, doctor_id) VALUES (:name, :doctor_id)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("name", this.name)
+      .addParameter("doctor_id", this.doctor_id)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static Patient find(int id) {
+  try(Connection con = DB.sql2o.open()) {
+    String sql = "SELECT * FROM patients WHERE id=:id";
+    Patient patient = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Patient.class);
+    return patient;
+  }
+}
 }

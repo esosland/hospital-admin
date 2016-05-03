@@ -40,4 +40,12 @@ public class PatientTest {
     Patient secondPatient = new Patient("Bub");
     assertTrue(firstPatient.equals(secondPatient));
   }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Patient myPatient = new Patient("Bub");
+    myPatient.save();
+    Patient savedPatient = Patient.all().get(0);
+    assertEquals(myPatient.getId(), savedPatient.getId());
+  }
 }

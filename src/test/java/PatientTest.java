@@ -12,7 +12,7 @@ public class PatientTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM doctors *;";
+      String sql = "DELETE FROM patients *;";
       con.createQuery(sql).executeUpdate();
     }
   }
@@ -21,5 +21,16 @@ public class PatientTest {
   public void Patient_instantiatesCorrectly_true() {
     Patient myPatient = new Patient("Person");
     assertEquals(true, myPatient instanceof Patient);
+  }
+
+  @Test
+  public void getName_patientInstantiatesWithName_String() {
+    Patient myPatient = new Patient("Person");
+    assertEquals("Person", myPatient.getName());
+  }
+
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Patient.all().size(), 0);
   }
 }

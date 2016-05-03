@@ -24,8 +24,13 @@ public class DoctorTest {
   }
 
   @Test
-  public void getName_taskInstantiatesWithDescription_String() {
+  public void getName_doctorInstantiatesWithName_String() {
     Doctor myDoctor = new Doctor("Doctor Smith");
     assertEquals("Doctor Smith", myDoctor.getName());
+  }
+
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Doctor.all().size(), 0);
   }
 }

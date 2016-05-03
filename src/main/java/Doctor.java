@@ -1,3 +1,6 @@
+import java.util.List;
+import org.sql2o.*;
+
 public class Doctor {
   private int id;
   private int specialty;
@@ -9,5 +12,16 @@ public class Doctor {
 
   public String getName() {
     return name;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public static List<Doctor> all() {
+    String sql = "SELECT id, name FROM doctors";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Doctor.class);
+    }
   }
 }

@@ -40,4 +40,12 @@ public class DoctorTest {
     Doctor secondDoctor = new Doctor("Doctor Smith");
     assertTrue(firstDoctor.equals(secondDoctor));
   }
+
+  // @Test
+  // public void find_findsDoctorInDatabase_true() {
+  //   Doctor myDoctor = new Doctor("Doctor Smith");
+  //   myDoctor.save();
+  //   Doctor savedDoctor = Doctor.find(myDoctor.getId());
+  //   assertTrue(myDoctor.equals(savedDoctor));
+  // }
 }

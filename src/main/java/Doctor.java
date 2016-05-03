@@ -43,6 +43,15 @@ public class Doctor {
         .addParameter("name", this.name)
         .executeUpdate();
     }
+  }
 
+    public static Doctor find(int id) {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "SELECT * FROM doctors where id=:id";
+        Doctor doctor = con.createQuery(sql)
+          .addParameter("id", id)
+          .executeAndFetchFirst(Doctor.class);
+        return doctor;
+      }
   }
 }
